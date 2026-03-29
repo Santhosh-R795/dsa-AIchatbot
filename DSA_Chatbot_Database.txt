@@ -1,0 +1,593 @@
+================================================================================
+         DSA CHATBOT KNOWLEDGE BASE
+         Data Structures & Algorithms — Complete Reference Document
+         Version 1.0 | 2025
+================================================================================
+
+
+================================================================================
+1. INTRODUCTION
+================================================================================
+
+This document serves as the primary knowledge base for the DSA Chatbot — an
+AI-powered assistant designed to help students, developers, and engineers learn
+and reference Data Structures and Algorithms (DSA). The chatbot uses this
+structured content to answer user queries accurately and contextually.
+
+The database covers all major DSA topics: arrays, linked lists, trees, graphs,
+sorting, searching, dynamic programming, and more. Each section includes
+definitions, operations, complexity analysis, code examples, and common
+interview questions.
+
+1.1 HOW TO USE THIS DOCUMENT
+------------------------------
+Each section of this document maps to a chatbot intent category. The chatbot
+uses keyword extraction and semantic similarity to route user questions to the
+appropriate section and return a precise answer.
+
+
+================================================================================
+2. COMPLEXITY ANALYSIS CHEAT SHEET
+================================================================================
+
++----------------------------------+----------+------------+-----------+--------+
+| Data Structure / Algorithm       | Best     | Average    | Worst     | Space  |
++----------------------------------+----------+------------+-----------+--------+
+| Array Access                     | O(1)     | O(1)       | O(1)      | O(n)   |
+| Array Search                     | O(1)     | O(n)       | O(n)      | O(1)   |
+| Array Insert/Delete              | O(1)     | O(n)       | O(n)      | O(1)   |
+| Linked List Search               | O(1)     | O(n)       | O(n)      | O(n)   |
+| Linked List Insert/Delete        | O(1)     | O(1)       | O(1)      | O(1)   |
+| Stack Push/Pop                   | O(1)     | O(1)       | O(1)      | O(n)   |
+| Queue Enqueue/Dequeue            | O(1)     | O(1)       | O(1)      | O(n)   |
+| Hash Table Search/Insert         | O(1)     | O(1)       | O(n)      | O(n)   |
+| Binary Search Tree Search        | O(log n) | O(log n)   | O(n)      | O(n)   |
+| AVL Tree / Red-Black Tree        | O(log n) | O(log n)   | O(log n)  | O(n)   |
+| Heap Insert / Extract-Min        | O(1)     | O(log n)   | O(log n)  | O(n)   |
+| Graph BFS / DFS                  | O(1)     | O(V+E)     | O(V+E)    | O(V)   |
+| Bubble Sort                      | O(n)     | O(n^2)     | O(n^2)    | O(1)   |
+| Selection Sort                   | O(n^2)   | O(n^2)     | O(n^2)    | O(1)   |
+| Insertion Sort                   | O(n)     | O(n^2)     | O(n^2)    | O(1)   |
+| Merge Sort                       | O(nlogn) | O(n log n) | O(n log n)| O(n)   |
+| Quick Sort                       | O(nlogn) | O(n log n) | O(n^2)    | O(logn)|
+| Heap Sort                        | O(nlogn) | O(n log n) | O(n log n)| O(1)   |
+| Counting Sort                    | O(n+k)   | O(n+k)     | O(n+k)    | O(k)   |
+| Binary Search                    | O(1)     | O(log n)   | O(log n)  | O(1)   |
+| Dijkstra's Algorithm             | O(E)     | O((V+E)lgV)| O((V+E)lgV)| O(V)  |
+| Bellman-Ford                     | O(E)     | O(VE)      | O(VE)     | O(V)   |
+| Floyd-Warshall                   | O(V^3)   | O(V^3)     | O(V^3)    | O(V^2) |
+| Knapsack (DP)                    | O(nW)    | O(nW)      | O(nW)     | O(nW)  |
+| LCS (DP)                         | O(mn)    | O(mn)      | O(mn)     | O(mn)  |
++----------------------------------+----------+------------+-----------+--------+
+
+
+================================================================================
+3. DATA STRUCTURES
+================================================================================
+
+--------------------------------------------------------------------------------
+3.1 ARRAYS
+--------------------------------------------------------------------------------
+An array is a collection of elements stored in contiguous memory locations.
+All elements are of the same data type and accessible by index.
+
+Key Properties:
+  - Fixed size (static arrays) or dynamic (dynamic arrays / ArrayList)
+  - Zero-based indexing in most languages
+  - Cache-friendly due to contiguous memory
+  - Random access in O(1) time
+
+Operations & Complexity:
++------------------------+------------------+----------------------------------+
+| Operation              | Complexity       | Notes                            |
++------------------------+------------------+----------------------------------+
+| Access by index        | O(1)             | Direct memory calculation        |
+| Search (unsorted)      | O(n)             | Linear scan                      |
+| Search (sorted)        | O(log n)         | Binary search                    |
+| Insert at end          | O(1) amortized   | Dynamic array resize             |
+| Insert at position     | O(n)             | Shift elements right             |
+| Delete at end          | O(1)             | Reduce size                      |
+| Delete at position     | O(n)             | Shift elements left              |
++------------------------+------------------+----------------------------------+
+
+Common Interview Questions:
+  - Two Sum / Three Sum
+  - Maximum Subarray (Kadane's Algorithm)
+  - Find duplicates in an array
+  - Rotate array by k positions
+  - Merge two sorted arrays
+
+
+--------------------------------------------------------------------------------
+3.2 LINKED LISTS
+--------------------------------------------------------------------------------
+A linked list is a linear data structure where elements (nodes) are stored at
+non-contiguous memory locations, each holding a data value and a pointer to
+the next node.
+
+Types:
+  - Singly Linked List   — each node points to the next
+  - Doubly Linked List   — each node points to both next and previous
+  - Circular Linked List — last node points back to head
+
+Sample Node Structure (Python):
+  class Node:
+      def __init__(self, data):
+          self.data = data
+          self.next = None
+
+Common Interview Questions:
+  - Reverse a linked list (iterative and recursive)
+  - Detect a cycle (Floyd's algorithm)
+  - Find the middle of a linked list
+  - Merge two sorted linked lists
+  - Remove Nth node from end
+
+
+--------------------------------------------------------------------------------
+3.3 STACKS
+--------------------------------------------------------------------------------
+A stack is a LIFO (Last In, First Out) data structure. Elements are inserted
+and removed from the same end called the top.
+
+Core Operations:
+  - push(x)      — add element to top:           O(1)
+  - pop()        — remove top element:            O(1)
+  - peek()/top() — view top without removing:     O(1)
+  - isEmpty()    — check if stack is empty:       O(1)
+
+Applications:
+  - Function call stack / recursion
+  - Undo/Redo operations
+  - Expression evaluation and balancing parentheses
+  - Backtracking algorithms
+
+
+--------------------------------------------------------------------------------
+3.4 QUEUES
+--------------------------------------------------------------------------------
+A queue is a FIFO (First In, First Out) data structure. Elements are inserted
+at the rear (enqueue) and removed from the front (dequeue).
+
+Variants:
+  - Simple Queue
+  - Circular Queue       — wraps around the array
+  - Deque                — insert/delete at both ends (Double-Ended Queue)
+  - Priority Queue       — elements dequeued by priority (implemented via Heap)
+
+
+--------------------------------------------------------------------------------
+3.5 HASH TABLES
+--------------------------------------------------------------------------------
+A hash table stores key-value pairs using a hash function to map keys to
+bucket indices, enabling average O(1) lookup, insertion, and deletion.
+
+Collision Resolution:
+  - Chaining        — each bucket holds a linked list of entries
+  - Open Addressing — linear probing, quadratic probing, double hashing
+
+Load Factor:
+  Load factor = (number of elements) / (number of buckets)
+  Rehashing is triggered when load factor exceeds a threshold
+  (typically 0.75 in Java's HashMap).
+
+
+--------------------------------------------------------------------------------
+3.6 TREES
+--------------------------------------------------------------------------------
+A tree is a hierarchical data structure with a root node and subtrees of
+children, with no cycles.
+
+Tree Terminology:
++------------+---------------------------------------------+
+| Term       | Definition                                  |
++------------+---------------------------------------------+
+| Root       | Top-most node with no parent                |
+| Leaf       | Node with no children                       |
+| Height     | Longest path from root to a leaf            |
+| Depth      | Distance from root to a node                |
+| Degree     | Number of children of a node                |
+| Subtree    | A node and all its descendants              |
++------------+---------------------------------------------+
+
+Binary Tree Traversals:
+  - Inorder   (Left -> Root -> Right) — gives sorted output for BST
+  - Preorder  (Root -> Left -> Right) — copy/serialize a tree
+  - Postorder (Left -> Right -> Root) — delete a tree
+  - Level Order (BFS)                 — visit level by level
+
+Binary Search Tree (BST):
+  A BST is a binary tree where for every node, all values in the left subtree
+  are smaller and all values in the right subtree are larger.
+
+Balanced Trees:
+  - AVL Tree       — strictly balanced (|balance factor| <= 1), O(log n) ops
+  - Red-Black Tree — approximately balanced; used in Java TreeMap, C++ std::map
+  - B-Tree/B+ Tree — used in databases and file systems
+
+
+--------------------------------------------------------------------------------
+3.7 HEAPS
+--------------------------------------------------------------------------------
+A heap is a complete binary tree satisfying the heap property:
+  - Max-Heap: every parent >= its children
+  - Min-Heap: every parent <= its children
+
+Operations:
+  - Insert:         O(log n) — add at end, then heapify up
+  - Extract-Min/Max:O(log n) — remove root, replace with last, heapify down
+  - Peek:           O(1)     — root is always the min/max
+  - Build Heap:     O(n)     — from an unsorted array
+
+Applications:
+  - Priority Queue implementation
+  - Heap Sort
+  - Dijkstra's shortest path
+  - K-th largest/smallest element
+
+
+--------------------------------------------------------------------------------
+3.8 GRAPHS
+--------------------------------------------------------------------------------
+A graph is a collection of vertices (nodes) and edges (connections).
+Graphs can be directed or undirected, weighted or unweighted.
+
+Representation:
+  - Adjacency Matrix — O(V^2) space, O(1) edge lookup
+  - Adjacency List   — O(V+E) space, O(degree) edge lookup
+
+Key Graph Algorithms:
++--------------------+--------------------------------------------+------------------+
+| Algorithm          | Use Case                                   | Complexity       |
++--------------------+--------------------------------------------+------------------+
+| BFS                | Shortest path (unweighted), Level order    | O(V+E)           |
+| DFS                | Topological sort, cycle detection          | O(V+E)           |
+| Dijkstra           | Shortest path (non-negative weights)       | O((V+E) log V)   |
+| Bellman-Ford       | Shortest path (negative weights allowed)   | O(VE)            |
+| Floyd-Warshall     | All-pairs shortest path                    | O(V^3)           |
+| Prim's / Kruskal's | Minimum Spanning Tree                      | O(E log V)       |
+| Topological Sort   | Task scheduling, dependency resolution     | O(V+E)           |
+| Union-Find (DSU)   | Cycle detection, connected components      | O(alpha(n))      |
++--------------------+--------------------------------------------+------------------+
+
+
+================================================================================
+4. SORTING ALGORITHMS
+================================================================================
+
+Sorting is the process of arranging elements in a particular order
+(ascending or descending).
+
+--------------------------------------------------------------------------------
+4.1 COMPARISON-BASED SORTS
+--------------------------------------------------------------------------------
+
+BUBBLE SORT
+  Description : Repeatedly swaps adjacent elements if they are in wrong order.
+  Best Case   : O(n)
+  Average Case: O(n^2)
+  Worst Case  : O(n^2)
+  Space       : O(1)
+  Stable      : Yes
+
+  Code (Python):
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+SELECTION SORT
+  Description : Finds minimum element and places it at the beginning each pass.
+  Best Case   : O(n^2)
+  Average Case: O(n^2)
+  Worst Case  : O(n^2)
+  Space       : O(1)
+  Stable      : No
+
+INSERTION SORT
+  Description : Builds sorted array one element at a time by inserting each
+                element into its correct position.
+  Best Case   : O(n)      — already sorted
+  Average Case: O(n^2)
+  Worst Case  : O(n^2)
+  Space       : O(1)
+  Stable      : Yes
+
+MERGE SORT
+  Description : Divides array into halves, recursively sorts, then merges.
+                Guaranteed O(n log n), stable.
+  Best Case   : O(n log n)
+  Average Case: O(n log n)
+  Worst Case  : O(n log n)
+  Space       : O(n)
+  Stable      : Yes
+
+QUICK SORT
+  Description : Selects pivot, partitions elements around it.
+                In-place but not stable. Worst case with bad pivot.
+  Best Case   : O(n log n)
+  Average Case: O(n log n)
+  Worst Case  : O(n^2)
+  Space       : O(log n)
+  Stable      : No
+
+HEAP SORT
+  Description : Builds a max-heap, repeatedly extracts maximum.
+                O(n log n) all cases, in-place but not stable.
+  Best Case   : O(n log n)
+  Average Case: O(n log n)
+  Worst Case  : O(n log n)
+  Space       : O(1)
+  Stable      : No
+
+--------------------------------------------------------------------------------
+4.2 NON-COMPARISON SORTS
+--------------------------------------------------------------------------------
++----------------+------------------------------+----------------+----------+
+| Algorithm      | Best For                     | Time           | Space    |
++----------------+------------------------------+----------------+----------+
+| Counting Sort  | Small integer ranges         | O(n + k)       | O(k)     |
+| Radix Sort     | Fixed-length integers/strings| O(d x (n + k)) | O(n + k) |
+| Bucket Sort    | Uniformly distributed floats | O(n) average   | O(n)     |
++----------------+------------------------------+----------------+----------+
+
+
+================================================================================
+5. SEARCHING ALGORITHMS
+================================================================================
+
+--------------------------------------------------------------------------------
+5.1 LINEAR SEARCH
+--------------------------------------------------------------------------------
+  Description: Checks each element one by one.
+  Time       : O(n)
+  Works on   : Unsorted and sorted arrays
+
+--------------------------------------------------------------------------------
+5.2 BINARY SEARCH
+--------------------------------------------------------------------------------
+  Description: Requires a sorted array. Halves the search space each step.
+  Time       : O(log n)
+  Space      : O(1) iterative, O(log n) recursive
+
+  Code (Python):
+    def binary_search(arr, target):
+        left, right = 0, len(arr) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if arr[mid] == target:
+                return mid
+            elif arr[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return -1
+
+--------------------------------------------------------------------------------
+5.3 BINARY SEARCH VARIANTS
+--------------------------------------------------------------------------------
+  - Find first / last occurrence of a value
+  - Find smallest element greater than target (upper bound)
+  - Search in rotated sorted array
+  - Find peak element
+
+
+================================================================================
+6. DYNAMIC PROGRAMMING (DP)
+================================================================================
+
+Dynamic Programming solves complex problems by breaking them into overlapping
+subproblems and storing results to avoid recomputation.
+
+--------------------------------------------------------------------------------
+6.1 KEY CONCEPTS
+--------------------------------------------------------------------------------
+  - Optimal Substructure   — optimal solution uses optimal solutions of subproblems
+  - Overlapping Subproblems— same subproblems are solved multiple times
+  - Memoization (Top-Down) — recursive + cache
+  - Tabulation (Bottom-Up) — iterative + DP table
+
+--------------------------------------------------------------------------------
+6.2 CLASSIC DP PROBLEMS
+--------------------------------------------------------------------------------
++----------------------------------+----------------------+----------------+
+| Problem                          | Approach             | Complexity     |
++----------------------------------+----------------------+----------------+
+| Fibonacci                        | Memoization/Tabulate | O(n)           |
+| 0/1 Knapsack                     | 2D DP table          | O(nW)          |
+| Longest Common Subsequence (LCS) | 2D DP table          | O(mn)          |
+| Longest Increasing Subsequence   | DP + Binary Search   | O(n log n)     |
+| Coin Change (min coins)          | 1D DP table          | O(n x amount)  |
+| Edit Distance                    | 2D DP table          | O(mn)          |
+| Matrix Chain Multiplication      | Interval DP          | O(n^3)         |
+| Rod Cutting                      | 1D DP table          | O(n^2)         |
+| Partition Equal Subset Sum       | DP (subset sum)      | O(n x sum)     |
+| Egg Drop Problem                 | DP + Binary Search   | O(n log k)     |
++----------------------------------+----------------------+----------------+
+
+
+================================================================================
+7. GREEDY ALGORITHMS
+================================================================================
+
+Greedy algorithms build solutions step by step, always making the locally
+optimal choice at each step, hoping for a globally optimal result.
+
+Classic Greedy Problems:
+  - Activity Selection Problem  — maximize non-overlapping activities
+  - Fractional Knapsack         — maximize value; take fractions of items
+  - Huffman Encoding            — optimal prefix-free binary codes
+  - Job Sequencing with Deadlines — maximize profit
+  - Minimum Spanning Tree       — Prim's and Kruskal's algorithms
+  - Dijkstra's Shortest Path    — greedy relaxation of edges
+
+NOTE: Greedy does NOT work for 0/1 Knapsack — use Dynamic Programming instead.
+
+
+================================================================================
+8. BACKTRACKING
+================================================================================
+
+Backtracking explores all possible solutions by building candidates
+incrementally and abandoning (pruning) paths that cannot lead to a valid
+solution.
+
+Classic Backtracking Problems:
+  - N-Queens Problem
+  - Sudoku Solver
+  - Rat in a Maze
+  - Permutations and Combinations
+  - Word Search in a Grid
+  - Graph Coloring
+
+General Template (Python):
+  def backtrack(state):
+      if is_solution(state):
+          record(state)
+          return
+      for candidate in get_candidates(state):
+          apply(candidate, state)
+          backtrack(state)
+          undo(candidate, state)
+
+
+================================================================================
+9. CHATBOT Q&A DATABASE — SAMPLE INTENTS
+================================================================================
+
++---------------------------------------------+-----------------------+----------------------------+
+| User Query (Sample)                         | Intent                | Response Category          |
++---------------------------------------------+-----------------------+----------------------------+
+| What is a stack?                            | DEFINE_STACK          | Section 3.3                |
+| Time complexity of quicksort?               | COMPLEXITY_QUICKSORT  | Section 2 & 4.1            |
+| Difference between BFS and DFS?             | COMPARE_BFS_DFS       | Section 3.8                |
+| How does binary search work?                | EXPLAIN_BINARY_SEARCH | Section 5.2                |
+| What is dynamic programming?                | DEFINE_DP             | Section 6                  |
+| How to detect a cycle in a graph?           | ALGO_CYCLE_DETECT     | Section 3.8 (DFS/DSU)      |
+| What is a min-heap?                         | DEFINE_HEAP           | Section 3.7                |
+| Explain Dijkstra's algorithm                | EXPLAIN_DIJKSTRA      | Section 3.8                |
+| Sort an array of 0s, 1s, and 2s             | PROBLEM_DUTCH_FLAG    | Section 4.1                |
+| What data structure for LRU Cache?          | DESIGN_LRU            | Section 3.2 + 3.5          |
+| How is a hash table implemented?            | IMPLEMENT_HASHTABLE   | Section 3.5                |
+| Difference: array vs linked list?           | COMPARE_ARRAY_LL      | Section 3.1 & 3.2          |
+| What is memoization?                        | DEFINE_MEMOIZATION    | Section 6.1                |
+| Find the kth largest element                | PROBLEM_KTH_LARGEST   | Section 3.7                |
+| What is topological sort?                   | EXPLAIN_TOPO_SORT     | Section 3.8                |
++---------------------------------------------+-----------------------+----------------------------+
+
+
+================================================================================
+10. CHATBOT ARCHITECTURE NOTES
+================================================================================
+
+--------------------------------------------------------------------------------
+10.1 INTENT CLASSIFICATION PIPELINE
+--------------------------------------------------------------------------------
+  Step 1: Tokenization and stopword removal
+  Step 2: TF-IDF or embedding-based similarity matching
+  Step 3: Intent classification using the Q&A database (Section 9)
+  Step 4: Section retrieval from this knowledge base document
+  Step 5: Response generation (templated or generative)
+
+--------------------------------------------------------------------------------
+10.2 FALLBACK STRATEGY
+--------------------------------------------------------------------------------
+  If no intent is matched with confidence > 0.7, the chatbot responds:
+  "I found related topics: [list]. Please rephrase or select a topic."
+
+--------------------------------------------------------------------------------
+10.3 SUPPORTED QUERY TYPES
+--------------------------------------------------------------------------------
++----------------+-------------------------------+----------------------------------+
+| Query Type     | Example                       | Handling                         |
++----------------+-------------------------------+----------------------------------+
+| Definition     | What is a BST?                | Return definition paragraph      |
+| Complexity     | What is O(n log n)?           | Return complexity table row      |
+| Comparison     | Array vs Linked List?         | Return data from both sections   |
+| How-to         | How to implement a queue?     | Return operations + code block   |
+| Problem-solving| Find first duplicate in array | Return algorithm + hint          |
+| Best practice  | When to use DP vs Greedy?     | Return decision guide            |
++----------------+-------------------------------+----------------------------------+
+
+--------------------------------------------------------------------------------
+10.4 CONFIDENCE THRESHOLDS
+--------------------------------------------------------------------------------
+  >= 0.90       — High confidence:   return direct answer
+  0.70 – 0.89   — Medium confidence: return answer + ask for confirmation
+  0.50 – 0.69   — Low confidence:    return top 2-3 related topics
+  < 0.50        — No match:          trigger fallback response
+
+
+================================================================================
+11. QUICK REFERENCE CARDS
+================================================================================
+
+--------------------------------------------------------------------------------
+11.1 WHEN TO USE WHICH DATA STRUCTURE
+--------------------------------------------------------------------------------
++----------------------------------------------+--------------------------------+
+| Use Case                                     | Best Data Structure            |
++----------------------------------------------+--------------------------------+
+| LIFO operations (undo, recursion)            | Stack                          |
+| FIFO operations (task queues, BFS)           | Queue                          |
+| Fast key-value lookup                        | Hash Table                     |
+| Sorted data, fast search/insert/delete       | BST / AVL / Red-Black Tree     |
+| Priority-based retrieval                     | Heap / Priority Queue          |
+| Graph traversal and pathfinding              | Graph (Adjacency List)         |
+| Range queries and prefix sums                | Segment Tree / Fenwick Tree    |
+| String search and autocomplete               | Trie                           |
+| Disjoint sets / union operations             | Union-Find (DSU)               |
++----------------------------------------------+--------------------------------+
+
+--------------------------------------------------------------------------------
+11.2 ALGORITHM SELECTION GUIDE
+--------------------------------------------------------------------------------
++--------------------------------------------+-------------------------------+
+| Situation                                  | Recommended Algorithm         |
++--------------------------------------------+-------------------------------+
+| Sort small dataset (n < 20)                | Insertion Sort                |
+| Sort large dataset, stability needed       | Merge Sort                    |
+| Sort large dataset, in-place preferred     | Quick Sort (random pivot)     |
+| Sort integers in limited range             | Counting / Radix Sort         |
+| Shortest path, no negative edges           | Dijkstra's                    |
+| Shortest path, negative edges              | Bellman-Ford                  |
+| All pairs shortest path                    | Floyd-Warshall                |
+| Minimum Spanning Tree                      | Prim's or Kruskal's           |
+| Subproblem overlap exists                  | Dynamic Programming           |
+| Greedy choice property holds               | Greedy Algorithm              |
+| Explore all possibilities                  | Backtracking                  |
++--------------------------------------------+-------------------------------+
+
+
+================================================================================
+APPENDIX: GLOSSARY OF DSA TERMS
+================================================================================
+
++---------------------------+--------------------------------------------------+
+| Term                      | Definition                                       |
++---------------------------+--------------------------------------------------+
+| Algorithm                 | A step-by-step procedure to solve a problem      |
+| Big O Notation            | Upper bound of time/space complexity             |
+| Amortized Analysis        | Average cost per op over a sequence of ops       |
+| Recursion                 | A function that calls itself with smaller input  |
+| Divide and Conquer        | Break problem into subproblems, solve, combine   |
+| In-place Algorithm        | Uses O(1) extra space beyond the input           |
+| Stable Sort               | Preserves relative order of equal elements       |
+| Memoization               | Caching function results to avoid recomputation  |
+| Hashing                   | Mapping data to fixed-size values                |
+| Traversal                 | Visiting every node in a data structure          |
+| Greedy                    | Making the locally optimal choice each step      |
+| NP-Hard                   | No known polynomial-time algorithm exists        |
+| Amortized O(1)            | Occasional expensive ops averaged over many ops  |
+| Topological Order         | Linear ordering of vertices in a DAG             |
+| DAG                       | Directed Acyclic Graph — no cycles               |
+| MST                       | Minimum Spanning Tree — connects all nodes cheap |
+| DP                        | Dynamic Programming                              |
+| DSU                       | Disjoint Set Union (Union-Find data structure)   |
++---------------------------+--------------------------------------------------+
+
+
+================================================================================
+         End of DSA Chatbot Knowledge Base Document
+         Version 1.0 | 2025
+================================================================================
