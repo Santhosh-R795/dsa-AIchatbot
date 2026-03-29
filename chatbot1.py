@@ -25,7 +25,7 @@ you should answer them in polite, if there is any questions out of the kb say yo
 """
 
 # --- Init Gemini ---
-st.session_state.client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+st.session_state.client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 st.session_state.chat = st.session_state.client.chats.create(
     model="gemini-2.0-flash",
     config={"system_instruction": system_prompt}
