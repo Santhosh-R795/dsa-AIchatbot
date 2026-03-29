@@ -6,7 +6,7 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 os.environ["GRPC_DNS_RESOLVER"] = "native"
 
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 
 # --- Page Config ---
 st.set_page_config(page_title="DSA Chatbot", page_icon="🧠")
@@ -25,13 +25,11 @@ you should answer them in polite, if there is any questions out of the kb say yo
 """
 
 # --- Init Gemini ---
-if "chat" not in st.session_state:
-    genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-    model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
-        system_instruction=system_prompt
-    )
-    st.session_state.chat = model.start_chat()
+st.session_state.client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+st.session_state.chat = st.session_state.client.chats.create(
+    model="gemini-2.0-flash",
+    config={"system_instruction": system_prompt}
+)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
