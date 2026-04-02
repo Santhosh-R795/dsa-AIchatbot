@@ -41,7 +41,7 @@ if user_input := st.chat_input("Ask a DSA question..."):
         st.markdown(user_input)
     try:
         response = st.session_state.client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             messages=st.session_state.messages
         )
         bot_reply = response.choices[0].message.content
