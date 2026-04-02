@@ -1,12 +1,6 @@
-import ssl
-import certifi
 import os
-
-os.environ['SSL_CERT_FILE'] = certifi.where()
-os.environ["GRPC_DNS_RESOLVER"] = "native"
-
 import streamlit as st
-from google import genai
+from groq import Groq
 
 # --- Page Config ---
 st.set_page_config(page_title="DSA Chatbot", page_icon="🧠")
@@ -19,35 +13,41 @@ with open("DSA_Chatbot_Database.txt", "r") as f:
 
 # --- System Prompt ---
 system_prompt = f"""
-you are a DSA based chatbot your job is to provide answers to the questions asked by the users,
-you should answer them in polite, if there is any questions out of the kb say you did not have that info, only refer the kb and provide the response.
+You are a DSA based chatbot. Your job is to provide answers to questions about Data Structures & Algorithms politely.
+If there are any questions outside the knowledge base, say you do not have that info.
 {kb}
 """
 
-# --- Init Gemini ---
-st.session_state.client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
-st.session_state.chat = st.session_state.client.chats.create(
-    model="gemini-2.0-flash-lite",
-    config={"system_instruction": system_prompt}
-)
+# --- Init Groq Client ---
+if "client" not in st.session_state:
+    st.session_state.client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [{"role": "system", "content": system_prompt}]
+
+if "display_messages" not in st.session_state:
+    st.session_state.display_messages = []
 
 # --- Display Chat History ---
-for msg in st.session_state.messages:
+for msg in st.session_state.display_messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
 # --- Chat Input ---
 if user_input := st.chat_input("Ask a DSA question..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.display_messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
-
-    response = st.session_state.chat.send_message(user_input)
-    bot_reply = response.text
-
+    try:
+        response = st.session_state.client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=st.session_state.messages
+        )
+        bot_reply = response.choices[0].message.content
+    except Exception as e:
+        bot_reply = f"⚠️ Error: {str(e)}"
     st.session_state.messages.append({"role": "assistant", "content": bot_reply})
+    st.session_state.display_messages.append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant"):
         st.markdown(bot_reply)
